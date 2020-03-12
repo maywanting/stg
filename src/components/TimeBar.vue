@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="range" v-model.number="amount" max=1999> {{ amount }}
+        <input type="range" v-model.number="amount" max=1999 class="timebar"> {{ amount }}
     </div>
 </template>
 
@@ -14,7 +14,14 @@ export default {
         amount: function(val, oldVal) {
             this.eventHub.$emit('timeInAttractor', val);
             this.eventHub.$emit('timeInSTG', val);
+            this.eventHub.$emit('timeInOriginal', val)
         }
     }
 }
 </script>
+
+<style>
+    .timebar {
+        width: 95%
+    }
+</style>

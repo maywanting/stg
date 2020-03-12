@@ -1,36 +1,74 @@
 <template>
     <div id="app">
+        <md-app>
+            <md-app-toolbar class="md-primary">
+        <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
+          <md-icon>menu</md-icon>
+        </md-button>
+        <span class="md-title">My Title</span>
+      </md-app-toolbar>
+      <md-app-drawer :md-active.sync="menuVisible" md-persistent="full">
+        <md-toolbar class="md-transparent" md-elevation="0">
+            <span>class list</span>
+                    <div class="md-toolbar-section-end">
+            <md-button class="md-icon-button md-dense" @click="toggleMenu">
+              <md-icon>keyboard_arrow_left</md-icon>
+            </md-button>
+          </div>
+                </md-toolbar>
+
+                <Setting/>
+      </md-app-drawer>
+
+      <md-app-content>
         <div class="md-layout">
             <div class="md-layout-item"><Attractor/></div>
             <div class="md-layout-item"><STG/></div>
         </div>
         <div class="md-layout">
             <div class="md-layout-item">
-                <OriginalData/>
                 <TimeBar/>
+                            <OriginalData/>
             </div>
-            <div class="md-layout-item md-size-30">
-                <Setting/>
+            <div class="md-layout-item md-size-40">
+                <Scattor/>
             </div>
         </div>
+    </md-app-content>
+</md-app>
     </div>
     </template>
 
     <script>
-//import HelloWorld from './components/HelloWorld.vue'
 import Attractor from './components/Attractor.vue'
 import STG from './components/STG.vue'
 import TimeBar from './components/TimeBar.vue'
 import OriginalData from './components/OriginalData.vue'
 import Setting from './components/Setting.vue'
 import {dataHub} from './scripts/dataHub'
+import DataProcesser from './scripts/dataProcesser'
+import Scattor from './components/Scattor.vue'
 
 export default {
     name: 'app',
     data: () => ({
+        // projectName: 'mesocosm',
+        // projectName: 'demo1',
+        // projectName: 'demo2',
+        // projectName: 'demo3',
+        // projectName: 'demo4',
+        // projectName: 'demo5',
+        // projectName: 'demo6',
+        // projectName: 'demo9',
         projectName: 'food_chain',
+        // projectName: 'food_chain_edge',
+        // projectName: 'twitter',
+        // projectName: 'maizuru',
         originData: '',
         clusterInfo: '',
+        dataProcesser: new DataProcesser(),
+        menuVisible: false,
+        timeseries: '',
     }),
     components: {
         Attractor,
@@ -38,29 +76,46 @@ export default {
         TimeBar,
         OriginalData,
         Setting,
+        Scattor,
     },
-    mounted() {
+    async mounted() {
+        //print stg
+        await this.loadData('cluster')
+            .then(dataset => {
+                this.clusterInfo = dataset;
+            });
         //print attractor
-        this.loadData('tsne')
+        // await this.loadData('position')
+        await this.loadData('tsne')
+        // await this.loadData('pca')
             .then(dataset => {
                 // console.log(dataset);
                 this.originData = dataset;
-                this.eventHub.$emit('initAttractor', dataset);
-                this.eventHub.$emit('startSelectionInAttractor')
             })
 
-        //print stg
-        this.loadData('cluster')
-            .then(dataset => {
-                this.clusterInfo = dataset;
-                dataHub.labels = dataset.labels
-                this.eventHub.$emit('initSTG', dataset)
-            });
+        dataHub.labels = this.clusterInfo.labels
+        dataHub.clusterIds = this.clusterInfo.ids
+        dataHub.clusterIds = [0, 1, 2, 3, 4]
+        dataHub.clusterNames = dataHub.clusterIds
+        // dataHub.clusterNames = ['A', 'B', 'C', 'D', 'E']
+        let dataName = ['P1', 'P2', 'C1', 'C2', 'R']
+        // let dataName = ['Rot', 'Cal', 'Pico', 'Nano']
+        dataHub.position = this.originData
+        this.dataProcesser.init()
+        this.eventHub.$emit('initClusterSetting', dataHub.clusterIds, dataHub.clusterNames)
+        this.eventHub.$emit('initSTG', this.clusterInfo)
 
-        this.loadData('data')
+        this.eventHub.$emit('initAttractor', this.originData);
+        this.eventHub.$emit('startSelectionInAttractor')
+
+        // console.log(dataHub)
+        await this.loadData('data')
             .then(dataset => {
-                this.eventHub.$emit('initOriginal', dataset)
+                this.timeseries = dataset
             })
+        dataHub.originData = this.timeseries
+        this.eventHub.$emit('initOriginal', dataHub.originData, dataName)
+        this.eventHub.$emit('initScattor', dataHub.originData)
     },
     methods: {
         async loadData(name) {
@@ -68,7 +123,10 @@ export default {
             const res = await fetch(path);
             const data = await res.json();
             return data;
-        }
+        },
+        toggleMenu () {
+        this.menuVisible = !this.menuVisible
+      }
     }
 }
 </script>

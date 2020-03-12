@@ -1,10 +1,35 @@
 export const publicSetting = {
-    colormap : [
+    colormap: [
+        "#ca473f",
+        "#eea546",
+        "#b5c147",
+        "#5ca2d3",
+        "#9b66d1",
+        "#e56d37",
+        "#f6cd53",
+        "#60bbb6",
+        "#2959c7",
+    ],
+    colormap1 : [
         "#67B7DC",
         "#A367DC",
         "#DC6788",
         "#6771DC",
         "#DC8C67",
-        "#DC67CE"
+        // "#DC67CE",
+        // "#f1e0c5",
+        "#a8c19a",
+        "#63474d",
+        "#f39c6b",
+        "#f7c59f",
+        "#2c363f",
+        "#b73e46",
+        "#aa767c",
+        "#a63a50",
+        "#fcddbc",
     ],
+    // paddingAngle: 0.1,
+    paddingAngle: 0.3,
+    minAngle: 0.5,
+    maxAngle: 3*Math.PI / 4,
 }
