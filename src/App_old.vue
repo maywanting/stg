@@ -60,11 +60,10 @@ export default {
         // projectName: 'demo5',
         // projectName: 'demo6',
         // projectName: 'demo9',
-        // projectName: 'food_chain',
+        projectName: 'food_chain',
         // projectName: 'food_chain_edge',
         // projectName: 'twitter',
         // projectName: 'maizuru',
-        projectName: 'corpus_ja',
         originData: '',
         clusterInfo: '',
         dataProcesser: new DataProcesser(),
@@ -96,7 +95,7 @@ export default {
 
         dataHub.labels = this.clusterInfo.labels
         dataHub.clusterIds = this.clusterInfo.ids
-        dataHub.clusterIds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        dataHub.clusterIds = [0, 1, 2, 3, 4]
         dataHub.clusterNames = dataHub.clusterIds
         // dataHub.clusterNames = ['A', 'B', 'C', 'D', 'E']
         let dataName = ['P1', 'P2', 'C1', 'C2', 'R']

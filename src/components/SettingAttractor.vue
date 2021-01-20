@@ -1,25 +1,14 @@
 <template>
     <div id="setting">
-        <div>Scatter Plot 1</div>
+        <div>Dimension Reduction Algorithm</div>
         <div>
             <md-field>
-                <label>X-axis:</label>
-            <md-select>
-                <md-option value="C1">C1</md-option>
+          <md-select>
+              <md-option value="PCA">PCA</md-option>
               <md-option>t-SNE</md-option>
           </md-select>
         </md-field>
         </div>
-        <div>
-            <md-field>
-                <label>Y-axis:</label>
-            <md-select>
-              <md-option value="R">R</md-option>
-              <md-option>t-SNE</md-option>
-          </md-select>
-        </md-field>
-    </div>
-    <md-switch v-model="boolean" class="md-primary">line</md-switch>
     </div>
 </template>
 

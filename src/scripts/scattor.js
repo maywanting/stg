@@ -5,9 +5,9 @@ import {publicSetting} from './public'
 export default class Scattor {
     constructor() {
     }
-    initScattor () {
+    initScattor (data, item) {
 
-        let element = document.getElementById("scattor")
+        let element = document.getElementById(item)
 
         console.log(dataHub.originData)
         // const width = element.offsetWidth,

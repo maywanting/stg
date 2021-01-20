@@ -25,9 +25,9 @@ function gainDivideAngle(weight, startAngle, endAngle) {
 function drawPath(output, input, group, color, size, id) {
     let p_a = transPosition(size, output.startAngle);
     let p_s = transPosition(size, (output.startAngle + output.endAngle) / 2.0);
-    let p_b = transPosition(size* 0.9, input.endAngle);
-    let p_e = transPosition(size* 0.96, (input.startAngle+input.endAngle) / 2.0);
-    let p_c = transPosition(size* 0.94, input.startAngle);
+    let p_b = transPosition(size* 0.85, input.endAngle);
+    let p_e = transPosition(size* 0.95, (input.startAngle+input.endAngle) / 2.0);
+    let p_c = transPosition(size* 0.85, input.startAngle);
     let p_d = transPosition(size, output.endAngle);
 
     let MA = "M" + p_a.x + "," + p_a.y;
@@ -132,6 +132,7 @@ export default class STG {
         for (let i = 0; i < dataHub.clusterIds.length; i++) {
             for (let j = 0; j < dataHub.clusterIds.length; j++) {
                 if (dataset.relationship[i][j] != 0) {
+                    //inter path
                     drawPath(blocks[i].input[j], blocks[j].output[i], group, publicSetting.colormap[i], dataset.size, 'it' + dataset.index + '-' + i + '-' + j);
                 }
             }
@@ -285,9 +286,9 @@ export default class STG {
             .startAngle(standard)
             .endAngle(Math.PI * 2 + standard);
             // .colors(["green", "green", "green", "green", "green"])
-        console.log(dataPie)
+        // console.log(dataPie)
         let pie = pieFunction(dataPie); //calculate the block
-        console.log(pie)
+        // console.log(pie)
         let thetaSum = 0
         for (let i = 0; i < 5; i++) {
             if (dataPie[i].weight != 0) {
@@ -296,8 +297,8 @@ export default class STG {
                 thetaSum += theta
             }
         }
-        console.log("theta is ")
-        console.log(thetaSum)
+        // console.log("theta is ")
+        // console.log(thetaSum)
         // set chord as a group and move to the center
         return pie;
     }
