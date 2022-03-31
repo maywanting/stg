@@ -14,7 +14,7 @@ export default {
     },
     mounted() {
         this.eventHub.$on('initSTG', data => this.stg.initSTG(data))
-        this.eventHub.$on('timeInSTG', data => this.stg.timeInSTG(data))
+        // this.eventHub.$on('timeInSTG', data => this.stg.timeInSTG(data))
         // this.eventHub.$on('highStateInSTG', stateId => this.stg.highState(stateId))
         // this.eventHub.$on('recoveFromHighInSTG', () => this.stg.recoveFromHigh())
     }

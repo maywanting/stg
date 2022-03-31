@@ -68,8 +68,8 @@ export default class DataProcesser {
             numCluster.push(0)
         }
 
-        console.log(dataHub.position)
-        console.log(dataHub.labels)
+        // console.log(dataHub.position)
+        // console.log(dataHub.labels)
         for (let i = 0; i < dataHub.labels.length; i++) {
             if (dataHub.labels[i] != -1) {
                 // console.log(i)

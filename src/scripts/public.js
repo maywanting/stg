@@ -28,8 +28,8 @@ export const publicSetting = {
         "#a63a50",
         "#fcddbc",
     ],
-    // paddingAngle: 0.1,
-    paddingAngle: 0.3,
-    minAngle: 0.5,
+    // paddingAngle: 0,
+    paddingAngle: 0.05, //set the stg segment padding angle
+    minAngle: 1,
     maxAngle: 3*Math.PI / 4,
 }

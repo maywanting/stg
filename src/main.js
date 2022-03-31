@@ -8,10 +8,10 @@ Vue.config.productionTip = false
 Vue.use(VueMaterial)
 
 const eventHub = new Vue()
-Vue.mixin({
+Vue.mixin({//{{{
   data: () => ({eventHub})
 })
-
+//}}}
 new Vue({
   render: h => h(App),
 }).$mount('#app')

@@ -10,4 +10,6 @@ export let dataHub = {
     'centers': [], //center position of clusters
     'numCluster': [], //number of clusters
     'originData': [], //original time series data
+    'datasets': [],
+    'chords': [],
 }
